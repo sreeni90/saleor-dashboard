@@ -123,6 +123,7 @@ export enum ChannelErrorCode {
   ALREADY_EXISTS = "ALREADY_EXISTS",
   CHANNELS_CURRENCY_MUST_BE_THE_SAME = "CHANNELS_CURRENCY_MUST_BE_THE_SAME",
   CHANNEL_TARGET_ID_MUST_BE_DIFFERENT = "CHANNEL_TARGET_ID_MUST_BE_DIFFERENT",
+  CHANNEL_WITH_ORDERS = "CHANNEL_WITH_ORDERS",
   GRAPHQL_ERROR = "GRAPHQL_ERROR",
   INVALID = "INVALID",
   NOT_FOUND = "NOT_FOUND",
@@ -1697,6 +1698,8 @@ export interface ShippingPriceInput {
   name?: string | null;
   minimumOrderWeight?: any | null;
   maximumOrderWeight?: any | null;
+  maximumDeliveryDays?: number | null;
+  minimumDeliveryDays?: number | null;
   type?: ShippingMethodTypeEnum | null;
   shippingZone?: string | null;
 }
