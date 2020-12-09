@@ -797,6 +797,7 @@ type Channel implements Node {
   isActive: Boolean!
   slug: String!
   currencyCode: String!
+  hasOrders: Boolean!
 }
 
 type ChannelActivate {
@@ -849,6 +850,7 @@ enum ChannelErrorCode {
   UNIQUE
   CHANNEL_TARGET_ID_MUST_BE_DIFFERENT
   CHANNELS_CURRENCY_MUST_BE_THE_SAME
+  CHANNEL_WITH_ORDERS
 }
 
 type ChannelUpdate {
@@ -2728,7 +2730,7 @@ type Mutation {
   checkoutShippingMethodUpdate(checkoutId: ID, shippingMethodId: ID!): CheckoutShippingMethodUpdate
   channelCreate(input: ChannelCreateInput!): ChannelCreate
   channelUpdate(id: ID!, input: ChannelUpdateInput!): ChannelUpdate
-  channelDelete(id: ID!, input: ChannelDeleteInput!): ChannelDelete
+  channelDelete(id: ID!, input: ChannelDeleteInput): ChannelDelete
   channelActivate(id: ID!): ChannelActivate
   channelDeactivate(id: ID!): ChannelDeactivate
   attributeCreate(input: AttributeCreateInput!): AttributeCreate
@@ -4645,6 +4647,8 @@ type ShippingMethod implements Node & ObjectWithMetadata {
   name: String!
   minimumOrderWeight: Weight
   maximumOrderWeight: Weight
+  maximumDeliveryDays: Int
+  minimumDeliveryDays: Int
   privateMetadata: [MetadataItem]!
   metadata: [MetadataItem]!
   type: ShippingMethodTypeEnum
@@ -4741,6 +4745,8 @@ input ShippingPriceInput {
   name: String
   minimumOrderWeight: WeightScalar
   maximumOrderWeight: WeightScalar
+  maximumDeliveryDays: Int
+  minimumDeliveryDays: Int
   type: ShippingMethodTypeEnum
   shippingZone: ID
 }
